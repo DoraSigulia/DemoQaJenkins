@@ -1,19 +1,12 @@
 package sigulia.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import sigulia.pages.components.CalendarComponent;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistationFormPage {
 
@@ -38,20 +31,11 @@ public class RegistationFormPage {
                     dateCalendar = $("#dateOfBirthInput");
 
 
-
-    @Attachment(value = "Скриншот", type = "image/png", fileExtension = "png")
-    public byte[] attachScreenshot () {
-        return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-    @Attachment(value = "PageSource", type = "text/html", fileExtension = "html")
-    public byte[] attachPageSource () {
-        return WebDriverRunner.getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
-    }
-
     // actions
     public RegistationFormPage openPage () {
         open("/automation-practice-form");
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("$('#fixedban').remove()");
         return this;
     }
 
